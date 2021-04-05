@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
 
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.github',
 
     'apps.main',
     'apps.accounts'
@@ -65,7 +66,7 @@ ROOT_URLCONF = 'Articular.urls'
 
 ACCOUNT_FORMS = {
     'login': 'apps.accounts.forms.LoginForm',
-    'signup': 'apps.accounts.forms.SignupForm'
+    
 }
 
 TEMPLATES = [

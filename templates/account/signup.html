@@ -5,18 +5,36 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
-
-<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
-  {% csrf_token %}
-  {{ form.as_p }}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
-  {% endif %}
-  <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
-  <button type="submit" class="btn btn-danger">{% trans "Sign Up" %} &raquo;</button>
-</form>
-
-
+<div class='bold-line'></div>
+<div class='container'>
+  <div class='Box'>
+    <div class='overlay'></div>
+    <div class='content'>
+      <h1 class="welcome">{% trans "Sign Up" %}</h1>
+      <h4 class="head" style="color: black;">Welcome To Our Community
+      <span class="form_logo">Articular</span></h4>
+      <div class='spacing socialaccount_ballot'><span class='highlight'></span>    
+        <li class="socialaccount_providers signup_btns" style="list-style: none; text-decoration: none; margin-right: 10px;">
+          {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </li>           
+      </div>
+      <h4 style="color: cyan;" class="subtitle">{% blocktrans %}Already have an account? Then please 
+        <a href="{{ login_url }}" style='text-decoration: none;'> sign in</a>{% endblocktrans %}</h4>
+      
+      <!--
+      <form class="signup input-fields" id="signup_form" method="post" action="{% url 'account_signup' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        {% endif %}
+        <p style="margin-bottom: 0px;color: cyan;">{% blocktrans %}Already have an account? Please 
+          <a href="{{ login_url }}" style='text-decoration: none;'>sign in</a>{% endblocktrans %}</p>
+        <button type="submit" class="submit-btn full-width">{% trans "Sign Up" %} &raquo;</button>
+      </form>
+      -->
+    </div>
+  </div>
+</div>
 
 {% endblock %}
