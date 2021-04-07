@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Merriweather&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <title>Articular</title>
 </head>
-<body>
+<body style="background-color: #EEF0F1;">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="{% url 'frontpage' %}" style="color: rgb(233, 163, 34);" id="logo">Articular</a>
@@ -30,17 +30,26 @@
                     style="height: 35px;margin-right: 1px;width:300px" name="query">
                   </div>
                 </form>                      
-            </ul>
-            
+              </ul>
+            {% if not request.user.is_authenticated %}
             <div class="d-flex" id='NavItem'>
               <div style="margin-left: 12px" >
                 <a href="{% url 'account_login' %}" style="height: 40px;text-align:center;color:white;text-decoration: none;">
                 Log in</a>
                 <a href="{% url 'account_logout' %}" style="margin-left: 5px; height: 40px;text-align:center;color:white;text-decoration: none;">
                   Log out</a>
-                <a href="{% url 'account_signup' %}" class="btn " style="height: 40px;margin-left: 12px;margin-right: 20px;text-align:center;width:150px;background-color:blue;color:white;" >Sign up</a>
+                <a href="{% url 'account_signup' %}" class="btn" style="height: 40px;margin-left: 12px;margin-right: 20px;text-align:center;width:150px;background-color:blue;color:white;" >Sign up</a>
               </div>
-              
+            {% endif %}
+            
+            {% if request.user.is_authenticated %}
+            <div class="d-flex" id='NavItem'>
+              <div style="margin-left: 12px" >
+                <a href="{% url 'write_post' %}" class="btn btn-danger" style="height: 40px;text-align:center;color:white;text-decoration: none;margin-right: 20px;">
+                Write Post</a>
+              </div>
+            {% endif %}
+
           </div>
         </div>
       </nav>
@@ -48,9 +57,9 @@
         {% block title %}
         {% endblock %}
     </section>
-    <section>
-        {% block content %}
-        {% endblock %}
+    <section style="background-color: #EEF0F1;" >
+      {% block content %}
+      {% endblock %}  
     </section>
    
 

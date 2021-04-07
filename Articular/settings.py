@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
 
     'apps.main',
-    'apps.accounts'
 ]
 
 SITE_ID = 1
@@ -65,11 +64,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Articular.urls'
-
-ACCOUNT_FORMS = {
-    'login': 'apps.accounts.forms.LoginForm',
-    
-}
 
 TEMPLATES = [
     {

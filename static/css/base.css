@@ -7,3 +7,30 @@ section {
 #NavItem {
     font-family: 'Merriweather', serif;
 }
+#Post_box {
+    margin-top: 10px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 10px;
+    border: 1px black;
+    
+}
+
+#Post_box:hover {
+    border: 2px solid black;
+}
+
+#post_title {
+    font-family: 'Anton', sans-serif;
+    text-indent: 80px;
+    margin: 10px;
+    
+    color: black;
+    font-size: larger;
+}
+#post_para {
+    text-indent: 80px;
+}
+#user:hover {
+    color: black;
+}
