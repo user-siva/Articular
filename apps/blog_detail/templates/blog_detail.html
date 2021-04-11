@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="shadow" style="margin: 30px; padding: 20px; background-color: white;">
+    <h1 style="text-align: center;" class="post_title">{{posts.title}}</h1>
+    <p style="margin-top: 30px;" class="post_para">{{posts.content|safe}}</p>
+</div>
+{% endblock %}

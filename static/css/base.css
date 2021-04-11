@@ -20,7 +20,7 @@ section {
     border: 2px solid black;
 }
 
-#post_title {
+.post_title {
     font-family: 'Anton', sans-serif;
     text-indent: 80px;
     margin: 10px;

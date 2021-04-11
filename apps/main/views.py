@@ -11,14 +11,6 @@ def frontpage(request):
 
 @login_required
 def write_post(request):
-    if request.method == 'POST' and request.user.is_authenticated:
-        title = request.POST.get('title')
-        content = request.POST.get('content')
-        if title and content is not None:
-            Post.objects.create(user=request.user,title=title,content=content)
-            return redirect('frontpage')
+    
+    return render(request,'write_post.html')
 
-    context={
-
-    }
-    return render(request,'write_post.html',context)
