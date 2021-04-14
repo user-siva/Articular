@@ -38,10 +38,11 @@
 .bootstrap-tagsinput .tag {
   margin-right: 2px;
   color: white;
-  background-color: royalblue;
-  padding: 2px;
-  border-radius: 10px;
-  height: 5px;
+  background-color:rgb(27, 149, 224);
+  padding-left: 2px;
+  padding-right: 2px;
+  border-radius: 5px;
+  
 }
 .bootstrap-tagsinput .tag [data-role="remove"] {
   margin-left: 8px;

@@ -9,7 +9,7 @@ section {
 }
 #Post_box {
     margin-top: 10px;
-    height: 200px;
+    height: 250px;
     overflow: hidden;
     border-radius: 10px;
     border: 1px black;
@@ -33,4 +33,12 @@ section {
 }
 #user:hover {
     color: black;
+}
+#tag_name {
+    text-decoration: none;
+    background-color: steelblue;
+    margin-right: 2px;
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: 5px;
 }
