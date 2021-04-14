@@ -38,11 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'taggit',
+
     'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-
+    
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.github',
 
@@ -81,6 +83,8 @@ TEMPLATES = [
         },
     },
 ]
+
+DEFAULT_AUTO_FIELD='django.db.models.AutoField'
 
 WSGI_APPLICATION = 'Articular.wsgi.application'
 

@@ -11,12 +11,15 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/write_post.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-tagsinput.css' %}">
+
     <title>Articular</title>
     <style>
         .ck-editor__editable_inline {
             min-height: 300px;
         }
     </style>
+    
 </head>
 <body style="background-color: #EEF0F1;">
 <div style="margin: 20px;" id="write_post">
@@ -33,40 +36,57 @@
       <div class="tab-content shadow" id="myTabContent" style="background-color: white; padding: 20px;">
         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
             <h1 style="text-align: center;">Write Your Post here.</h1>
-            <form action="{% url 'post' %}" v-on:submit.prevent='publish()' method="POST">
+            <form action="." method="POST" id="myForm">
                 {% csrf_token %}
                 <div>
                     <label for="title" class="form-label" style="margin:5px">Title:</label>
                     <input type="text" name="title" class="form-control shadow-sm" v-model='title'>
                 </div>
+                <div style="margin-top: 20px;">
+                     <label>Tags:</label>
+                    <input type="text" data-role="tagsinput" class="tags" name="tags" placeholder="Add 'comma' to add tags">
+                </div>
                 <div id="app" class="shadow" style="margin-top: 20px;">
+                    Content:
                     <ckeditor :editor="editor" v-model="content" :config="editorConfig"></ckeditor>
                 </div>
-                <button type="submit" class="btn btn-danger" style="margin-top: 20px;">Publish</button>
+                <button type="submit" class="btn btn-danger" @click='publish()' style="margin-top: 20px;">Publish</button>
             </form>
         </div>
         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-            <div style="margin: 30px;">
-                <h1 style="text-align: center;" class="post_title">[[title]]</h1>
-                <p style="margin-top: 30px;" class="post_para" v-html='content'></p> 
+            <div v-if='title' v-if='content'>
+                <div style="margin: 30px;">
+                    <h1 style="text-align: center;" class="post_title">[[title]]</h1>
+                    <p style="margin-top: 30px;" class="post_para" v-html='content'></p> 
+                </div>
+                <button @click='publish()' class="btn btn-danger " style="margin-top: 20px;">Publish</button>
             </div>
-            <button @click='publish()' class="btn btn-danger" style="margin-top: 20px;">Publish</button>
+            <div v-else class="container">
+                You haven't added any posts,yet.
+            </div>
         </div>
       </div>
       
     
 </div>
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    
+    <script src="{% static 'js/bootstrap-tagsinput.js' %}"></script>
     <script src="https://unpkg.com/vue@next"></script>
     <script src="{% static 'js/ckeditor/ckeditor5-build-classic/build/ckeditor.js' %}"></script>
     <script src="{% static 'js/ckeditor/ckeditor5-vue/dist/ckeditor.js' %}"></script>
-    
 
-    
+    <script>
+        $(".bootstrap-tagsinput input[type=text]").tagsinput({
+            cancelConfirmKeysOnEmpty: true,
+            confirmKeys: [18]
+        });
+
+    </script>
     <script>
         var write_post = Vue.createApp({
             delimiters: ['[[', ']]'],
@@ -99,7 +119,7 @@
 				.then((response)=>{
 					console.log(response)
 					console.log(data)
-                    window.location.href = '{% url 'frontpage' %}'
+                    window.location.href = "{% url 'frontpage' %}"
 				})
 				.catch(function(error){
 					console.log(error)
