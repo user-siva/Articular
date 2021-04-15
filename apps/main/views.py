@@ -1,5 +1,6 @@
-from django.shortcuts import render,redirect,get_object_or_404
+from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 from taggit.models import Tag 
 from .models import Post
 
@@ -20,7 +21,23 @@ def tag_post_list(request, tag_slug=None):
     tag = None
     if tag_slug:
         tag = get_object_or_404(Tag, slug=tag_slug)
-        posts = Post.objects.filter(tags__in=[tag])
-    
-    
-    return render(request,'tag_post_list.html',{'posts':posts,'tag':tag})
+        posts = Post.objects.filter(tags__in=[tag]) 
+
+    context = {
+        'posts':posts,
+        'tag':tag,
+    } 
+   
+    return render(request,'tag_post_list.html',context)
+
+def search(request):
+	query = request.GET.get("query")
+	
+	posts = Post.objects.filter(Q(user__username__icontains=query) | Q(tags__name__icontains=query)).distinct()
+
+	context = {
+		'query':query,
+		'posts':posts
+	}
+
+	return render(request,'search.html',context)
