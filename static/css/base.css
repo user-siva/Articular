@@ -9,11 +9,21 @@ section {
 }
 #Post_box {
     margin-top: 10px;
-    height: 250px;
+    min-height: 200px;
+    max-height: 230px;
     overflow: hidden;
     border-radius: 10px;
     border: 1px black;
-    
+    position: relative;
+}
+
+#reading_list {
+    margin-top: 10px;
+    min-height: 200px;
+    max-height: 230px;
+    overflow: hidden;
+    border-radius: 10px;
+    position: relative;
 }
 
 #Post_box:hover {
@@ -21,13 +31,12 @@ section {
 }
 
 .post_title {
-    font-family: 'Anton', sans-serif;
     text-indent: 80px;
-    margin: 10px;
-    
+    text-decoration: none;
     color: black;
     font-size: larger;
 }
+
 #post_para {
     text-indent: 80px;
 }
@@ -41,4 +50,14 @@ section {
     padding-left: 2px;
     padding-right: 2px;
     border-radius: 5px;
+}
+.icon_div { 
+    position: absolute;                
+    bottom: 10px;                        
+}
+.like:hover {
+    color: red;
+}
+.comment:hover {
+    color: blue;
 }

@@ -13,5 +13,10 @@ class Post(models.Model):
     	ordering = ('-created_at',)
     
     def __str__(self):
-        return str(self.id)+'|'+str(self.user)
+        return str(self.id)
 
+class Reading_list(models.Model):
+    posts = models.ForeignKey(Post,related_name='lists',on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.posts.id)+'|'+str(self.posts.user)   

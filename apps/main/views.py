@@ -2,7 +2,8 @@ from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from taggit.models import Tag 
-from .models import Post
+from .models import Post,Reading_list
+import json
 
 def frontpage(request):
     posts = Post.objects.all()
@@ -41,3 +42,11 @@ def search(request):
 	}
 
 	return render(request,'search.html',context)
+
+def reading_list(request):
+    reading_lists = Reading_list.objects.all()
+    print(reading_list)
+    context = {
+        'reading_lists':reading_lists
+    }
+    return render(request,'reading_list.html',context)

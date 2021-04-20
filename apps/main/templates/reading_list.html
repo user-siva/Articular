@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container" id="box" style="margin-top: 30px;margin-bottom: 30px;">
+    <article class="bg-light shadow text-wrap p-5" id="reading_list">
+    {% for reading_list in reading_lists %}
+        <div style="margin-left: 30px;">
+            <div>
+                <a href="{% url 'blog_detail' pk=reading_list.posts.id %}" class="post_title">
+                {{reading_list.posts.title}}</a>
+            </div>
+            <small style="font-weight: 500">{{reading_list.posts.user}}</small>
+            <small style="color: dimgrey;">{{reading_list.posts.created_at}}</small>
+        </div>
+        <hr>
+    {% endfor %}
+    </article>     
+</div>
+
+
+{% endblock %}

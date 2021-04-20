@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import get_object_or_404
 from .models import *
 from django.http import JsonResponse
 import json
@@ -17,4 +17,14 @@ def post(request):
                 tag_instance.tags.add(i)
     
     jsonresponse = {'SUCCESS':True}
+    return JsonResponse(jsonresponse)
+
+def reading_list(request):
+    data = json.loads(request.body)
+    post_id = data['post_id']
+    jsonresponse = {'SUCCESS':True}
+    if request.method == 'POST' and request.user.is_authenticated:
+        posts = get_object_or_404(Post, pk=post_id)
+        Reading_list.objects.create(posts=posts)
+
     return JsonResponse(jsonresponse)

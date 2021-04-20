@@ -3,21 +3,7 @@
 {% load static %}
 
 {% block content %}
-<div class="container" id="box" style="margin-top: 30px;margin-bottom: 30px;">
-{% for post in posts %}
-<a href="{% url 'blog_detail' pk=post.id %}" style="text-decoration: none;">
-<div class="bg-light shadow text-wrap p-3" id="Post_box">
-    <p style="font-weight: 500;margin-bottom: 1px;">
-    By <span style="color:dimgray;" id="user">{{post.user}}</span></p>
-    <p style="margin-top: 0px;color: dimgrey;">{{post.created_at}}</p>
-    <h2 style="color: black;">{{post.title}}</h2>
-    {% for tag in post.tags.all %}
-        <a href="{% url 'tag_post_list' tag.slug %}" id="tag_name" class="link-light text-decoration-none badge ">
-            #{{tag.name}}
-        </a>
-    {% endfor %}
-</div> 
-</a>
-{% endfor %}      
-</div>
+
+    {% include 'post_box/post_box.html' %}
+
 {% endblock %}
