@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/profile_settings.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <title>Articular</title>
+</head>
+<body>
+  <div class="main-content" id="profile">
+   
+    <!-- Header -->
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px ;background-size: cover; background-position: center top;">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-8"></span>
+      <!-- Header container -->
+      <div class="container-fluid d-flex align-items-center">
+        <div class="row">
+          <div class="col-lg-7 col-md-10">
+            <h1 class="display-2 text-white">Hello {{ request.user.first_name }}</h1>
+            <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <div class="card card-profile shadow">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image">
+                {% if request.user.user_profile.profile_image  %}
+                    <img src="{{ request.user.user_profile.profile_image.url }}" id='profileimg' class="rounded-circle">
+                {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                <div class="d-flex justify-content-between">
+                </div>
+              </div>
+            </div>
+            
+            
+            <div class="card-body pt-0 pt-md-4">
+              <div class="row">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                   
+                  </div>
+                </div>
+              </div>
+              <div class="text-center">
+                <h3>
+                  {{ request.user.username }}<span class="font-weight-light">, {{ request.user.user_profile.age }}</span>
+                </h3>
+                <div class="h5 font-weight-300">
+                  <i class="ni location_pin mr-2"></i>{{ request.user.email }}
+                </div>
+                <div class="h5 mt-4">
+                  <small>Joined at:</small>
+                  <i class="ni business_briefcase-24 mr-2"></i>{{ request.user.date_joined|date:"M d, Y" }}
+                </div>
+                <div>
+                  <small>Last Login:</small>
+                  <i class="ni education_hat mr-2"></i>{{ request.user.last_login|date:"M d, Y" }}
+                </div>
+                <hr class="my-4">
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card shadow" id="form_box">
+            <div class="card-header bg-white border-0">
+              <div class="row align-items-center">
+                <div class="col-8">
+                  <h3 class="mb-0">My account</h3>
+                </div>
+                <div class="col-4 text-right">
+                  <a href="#update_btn" class="btn btn-sm btn-primary">Settings</a>
+                </div>
+              </div>
+            </div>
+            <div class="pl-lg-4 mt-5" style="margin-left: 27px;">
+              <h6 style="color: darkslategrey; ">Profile Image</h6>
+            <div class="d-flex ">
+              
+              <img src="{{ request.user.user_profile.profile_image.url }}" id='profileimg' class="rounded-circle" style="width: 70px;height: 70px;margin-right: 50px;">
+              <form method="POST" enctype="multipart/form-data" class="d-flex mt-3" >
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="submit" class="btn btn-sm btn-dark" style="height: 35px;" id="change_btn" value="change" title="click the image to choose"> 
+              </form>
+            </div>
+          </div>
+            <div class="card-body">
+              <form  method="POST" action="{% url 'profile_api' %}" onsubmit="redirect()">
+                {% csrf_token %}
+                <!--User Profile-->
+                <hr class="my-4">
+                <div class="pl-lg-4">
+                  <h6 class="heading-small mb-4" style="font-weight: bolder;color: black;">User information</h6>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-first-name">First name</label>
+                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="{{ request.user.first_name }}" readonly>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-last-name">Last name</label>
+                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="{{ request.user.last_name }}" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Address -->
+                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                <div class="pl-lg-4">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-address">Address</label>
+                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" type="text" name='address' value="{{ request.user.user_profile.address }}">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-city">City</label>
+                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" name='city'
+                        value="{{ request.user.user_profile.city }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group focused">
+                        <label class="form-control-label" for="input-country">Country</label>
+                        <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" name='country' value="{{ request.user.user_profile.country }}">
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-country">Postal code</label>
+                        <input id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code"  name='postal_code' value="{{ request.user.user_profile.postal_code }}">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <hr class="my-4">
+                <!-- Description -->
+                <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="input-age">Age</label>
+                      <input id="input-age" class="form-control form-control-alternative" placeholder="Age" name='age' value="{{ request.user.user_profile.age }}">
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="input-work">Work</label>
+                      <input type="text" id="input-work" class="form-control form-control-alternative" value="{{ request.user.user_profile.work }}" placeholder="Just what yo do"  name='work'>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="form-group focused">
+                      <label class="form-control-label" for="input-studies">Studies</label>
+                      <input type="text" id="input-studies" class="form-control form-control-alternative"
+                       placeholder="eg:Django,Vue"  name='education' value="{{ request.user.user_profile.education }}">
+                    </div>
+                </div>
+                </div>
+
+                </div>
+                <h6 class="heading-small text-muted mb-4">About me</h6>
+                <div class="pl-lg-4">
+                  <div class="form-group focused">
+                    <label>About Me</label>
+                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ..." 
+                    name='about' >{{ request.user.user_profile.about }}</textarea>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-success" id='update_btn' style="margin-right: 30px;float: right;" >Update</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+<script>
+  function redirect() {
+    window.location.href = "{% url 'profile_settings' %}"
+  }
+</script>
+</html>
+

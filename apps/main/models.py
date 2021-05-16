@@ -16,6 +16,7 @@ class Post(models.Model):
         return str(self.id)
 
 class Reading_list(models.Model):
+    user = models.ForeignKey(User,related_name='users',on_delete=models.CASCADE,null=True)
     posts = models.ForeignKey(Post,related_name='lists',on_delete=models.CASCADE)
 
     def __str__(self):

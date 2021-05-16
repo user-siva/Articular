@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.github',
 
     'apps.main',
-    'apps.blog_detail'
+    'apps.blog_detail',
+    'apps.userProfile'
 ]
 
 SITE_ID = 1
@@ -109,6 +110,11 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
+FILE_UPLOAD_HANDLERS = [
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler"
+    ]
+
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
 
@@ -151,4 +157,4 @@ STATICFILES_DIRS = [
 ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+MEDIA_ROOT = os.path.join(BASE_DIR,'media/')

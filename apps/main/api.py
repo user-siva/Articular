@@ -25,6 +25,6 @@ def reading_list(request):
     jsonresponse = {'SUCCESS':True}
     if request.method == 'POST' and request.user.is_authenticated:
         posts = get_object_or_404(Post, pk=post_id)
-        Reading_list.objects.create(posts=posts)
+        Reading_list.objects.create(user=request.user,posts=posts)
 
     return JsonResponse(jsonresponse)

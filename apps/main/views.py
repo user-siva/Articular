@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.shortcuts import render,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
@@ -12,7 +13,7 @@ def frontpage(request):
     }
     return render(request,'frontpage.html',context)
 
-@login_required
+@login_required(login_url='account_login')
 def write_post(request):
     
     return render(request,'write_post.html')
@@ -43,8 +44,9 @@ def search(request):
 
 	return render(request,'search.html',context)
 
+@login_required(login_url='account_login')
 def reading_list(request):
-    reading_lists = Reading_list.objects.all()
+    reading_lists = Reading_list.objects.filter(user=request.user)
     print(reading_list)
     context = {
         'reading_lists':reading_lists

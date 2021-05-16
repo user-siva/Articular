@@ -7,10 +7,37 @@ section {
 #NavItem {
     font-family: 'Merriweather', serif;
 }
+/* col-1-box */
+
+#col-1-box {
+  margin-top: 30px;
+  margin-left: 30px;
+  height: 400px;
+  max-height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 1px black;
+  position: relative;
+}
+
+.links {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.links a {
+  text-decoration: none;
+  margin-top: 20px;
+  display: block;
+  color: black;
+  font-weight: 400;
+}
+.links a:nth-child(2) {
+  font-weight: bolder;
+}
+/* Post_box */
 #Post_box {
     margin-top: 10px;
-    min-height: 200px;
-    max-height: 230px;
     overflow: hidden;
     border-radius: 10px;
     border: 1px black;
@@ -20,14 +47,14 @@ section {
 #reading_list {
     margin-top: 10px;
     min-height: 200px;
-    max-height: 230px;
+    max-height: auto;
     overflow: hidden;
     border-radius: 10px;
     position: relative;
 }
 
 #Post_box:hover {
-    border: 2px solid black;
+    border: 1px solid black;
 }
 
 .post_title {
@@ -47,6 +74,7 @@ section {
     text-decoration: none;
     background-color: steelblue;
     margin-right: 2px;
+    margin-bottom: 15px;
     padding-left: 2px;
     padding-right: 2px;
     border-radius: 5px;
@@ -61,3 +89,7 @@ section {
 .comment:hover {
     color: blue;
 }
+
+/* Profile */
+
+
