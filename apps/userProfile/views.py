@@ -1,4 +1,5 @@
-from django.shortcuts import get_object_or_404, render,redirect
+from apps.main.models import Post
+from django.shortcuts import render
 from .models import UserProfile
 from .forms import UserProfileForm
 from django.shortcuts import get_object_or_404
@@ -19,3 +20,12 @@ def profile_settings(request):
 	}
 
 	return render(request,'profile_settings.html',context)
+
+def profile_page(request,pk,user):
+	posts = get_object_or_404(Post,pk=pk)
+	user_posts = Post.objects.filter(user=user)
+	context= {
+		'posts':posts,
+		'user_posts':user_posts
+	}
+	return render(request,'profile_page.html',context)

@@ -12,9 +12,12 @@
             <div>
                 <a href="{% url 'blog_detail' pk=reading_list.posts.id %}" class="post_title">
                 {{reading_list.posts.title}}</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'delete_reading_list' pk=reading_list.posts.id %} " 
+                style="float: right;">Remove</a>
             </div>
             <small style="font-weight: 500">{{reading_list.posts.user}}</small>
             <small style="color: dimgrey;">{{reading_list.posts.created_at}}</small>
+           
         </div>
         <hr>
     {% endfor %}

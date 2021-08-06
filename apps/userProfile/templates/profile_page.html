@@ -1,0 +1,148 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'css/profile_page.css' %}">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.3/css/all.css" integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk" crossorigin="anonymous">
+	<title>Profile</title>
+</head>
+<body style="background-color: #EEF0F1;overflow-x: hidden;">
+	
+	<div class="container">
+		<div class="profile_header">
+			<div class="profile_img">
+				<img src="{{ posts.user.user_profile.profile_image.url }}" width="200" alt="">
+			</div>
+			<div class="profile_nav_info">
+				<h3 class="username">{{ posts.user.username }}</h3>
+				<div class="address">
+					<p class="state">{{ posts.user.user_profile.city }},</p>
+					<span class="country">{{ posts.user.user_profile.country }}.</span>
+				</div>
+			</div>
+			<!--
+			<div class="profile_option">
+				<div class="notification">
+					<i class="fa fa-bell"></i>
+					<span class="alert_msg">1</span>
+				</div>
+			</div>
+			-->
+		</div>
+		<div class="main_bd">
+			<div class="left_side">
+				<div class="profile_side" style="height: 400px;">
+					<p class="phone_number" style="margin-top: 20px;">
+						<i class="fa fa-phone"></i>{{ posts.user.user_profile.phone }}
+					</p>
+					
+					<p class="user_mail" style="margin-top: 40px;">
+						<i class="fa fa-envelope"></i>{{ posts.user.email }}
+					</p>
+					<div class="user_bio"style="margin-top: 40px;">
+						<h3>Expertise:</h3>
+						<p class="bio">
+							{{ posts.user.user_profile.education }}
+						</p>
+					</div>
+					<div class="user_bio"style="margin-top: 40px;">
+						<h3>Work:</h3>
+						<p class="bio">
+							{{ posts.user.user_profile.work }}
+						</p>
+					</div>
+					<!--
+					<div class="profile_btn">
+						<button class="chat_btn">
+							<i class="fa fa-comment"></i>Chat
+						</button>
+						<button class="create_btn">
+							<i class="fa fa-plus"></i>Create
+						</button>
+					</div>
+					<div class="user_rating">
+						<h3 class="rating">4.5</h3>
+						<div class="rate">
+							<div class="stars">
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							<i class="fa fa-star"></i>
+							</div>
+							<span class="no_user">
+								<span>123</span>&nbsp;&nbsp;reviews
+							</span>
+						</div>
+					</div>
+					-->
+				</div>
+			</div>
+
+			<div class="right_side">
+				<div class="nav">
+					<ul>
+						<li onclick="tabs(0)" class="user_post active" active>Posts</li>
+						<li onclick="tabs(1)" class="user_review">About</li>
+						
+					</ul>
+				</div>
+				<div class="profile_body">
+					<div class="profile_post tab">
+						<h1>User Posts</h1>
+						<div style="margin-top: 30px;">
+							{% for post in user_posts %}
+							<div style="margin-left: 30px;">
+								<div>
+									<a href="{% url 'blog_detail' pk=post.id %}" class="post_title">
+									{{post.title}}</a>
+								</div>
+								<small style="font-weight: 500">{{post.user}}</small>
+								<small style="color: dimgrey;">{{post.created_at}}</small>
+								<hr>
+							</div>
+							
+							{% endfor %}
+						</div>
+					</div>
+					<div class="profile_reviews tab">
+						<h1 style="text-align: center;">About the Author</h1>
+						<div style="margin-top: 30px;margin-left: 30px;">
+						<p>{{ posts.user.user_profile.about }}</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js" integrity="sha512-n/4gHW3atM3QqRcbCn6ewmpxcLAHGaDjpEBu4xZd47N0W2oQ+6q7oc3PXstrJYXcbNU1OHdQ1T7pAP+gi5Yu8g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<script type="text/javascript">
+
+        $('.nav ul li').click(function() {
+            $(this).addClass('active').siblings().removeClass('active');
+        })
+
+        const tabBtn = document.querySelectorAll('.nav ul li');
+        const tab = document.querySelectorAll('.tab');
+
+        function tabs(index) {
+            tab.forEach(
+                function(node) {
+                    node.style.display = 'none';
+                }
+            );
+            tab[index].style.display = 'block';
+        };
+        tabs(0)
+
+
+
+    </script>
+</body>
+</html>

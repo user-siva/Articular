@@ -53,9 +53,7 @@ section {
     position: relative;
 }
 
-#Post_box:hover {
-    border: 1px solid black;
-}
+
 
 .post_title {
     text-indent: 80px;
@@ -89,7 +87,12 @@ section {
 .comment:hover {
     color: blue;
 }
+#post_title {
+    text-decoration: none;
+    color: black;
+    font-size: 1.5em;
 
-/* Profile */
+}
+
 
 

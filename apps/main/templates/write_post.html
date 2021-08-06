@@ -45,12 +45,15 @@
                 <div style="margin-top: 20px;">
                     <label>Tags:</label>
                     <input type="text" data-role="tagsinput" class="tags" name="tags" placeholder="Add 'comma' to add tags">
-                    
+                <div style="margin-left: 5px;">
+                    <b>Warning:</b>Don't press enter after adding tags use comma instead
+                </div>
                 </div>
                 <div id="app" class="shadow" style="margin-top: 20px;">
                     Content:
                     <ckeditor :editor="editor" v-model="content" :config="editorConfig"></ckeditor>
                 </div>
+                <!-- <button style="margin-top: 20px;" href='#profile' class="btn btn-outline-info">Preview</button> --> 
                 <button type="submit" class="btn btn-danger" @click='publish()' style="margin-top: 20px;">Publish</button>
             </form>
         </div>

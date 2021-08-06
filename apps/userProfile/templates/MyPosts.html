@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container" id="box" style="margin-top: 30px;margin-bottom: 30px;">
+    
+    <article class="bg-light shadow text-wrap p-5" id="my_posts">
+        <h4 class="mb-4">Your Posts</h4>
+    {% for post in posts %}
+        <div style="margin-left: 30px;">
+            <div>
+                <a href="{% url 'blog_detail' pk=post.id %}" class="post_title">
+                {{post.title}}</a>
+            </div>
+            <small style="font-weight: 500">{{post.user}}</small>
+            <small style="color: dimgrey;">{{post.created_at}}</small>
+            
+        </div>
+        <hr>
+    {% endfor %}
+    </article>     
+</div>
+
+
+{% endblock %}

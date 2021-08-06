@@ -1,10 +1,9 @@
 from django.contrib.auth.models import User
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import redirect, render,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from taggit.models import Tag 
 from .models import Post,Reading_list
-import json
 
 def frontpage(request):
     posts = Post.objects.all()
@@ -52,3 +51,20 @@ def reading_list(request):
         'reading_lists':reading_lists
     }
     return render(request,'reading_list.html',context)
+
+@login_required(login_url='account_login')   
+def delete_reading_list(request,pk):
+
+    Reading_list.objects.get(user=request.user,posts_id=pk).delete()
+
+    return redirect('/reading_list/')
+
+def myposts(request):
+
+    my_posts = Post.objects.filter(user=request.user)
+
+    context = {
+    	'posts':my_posts,
+    }
+    
+    return render(request,'MyPosts.html',context)
