@@ -25,7 +25,7 @@ SECRET_KEY = '@k)y8@+-wbbrr9sgz4c=@^v78e-5riev8%#1k#)ox_ola^ov+r'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sivadev.pythonanywhere.com','127.0.0.1:8000']
 
 
 # Application definition
@@ -55,7 +55,7 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = 'http://127.0.0.1:8000'
+LOGIN_REDIRECT_URL = 'https://sivadev.pythonanywhere.com/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -155,6 +155,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
+STATIC_ROOT = '/home/SivaDev/Articular/static/'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'media/')
+MEDIA_ROOT = '/home/SivaDev/blog/media/'
