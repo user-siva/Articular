@@ -3,3 +3,5 @@ Pipfile
 Pipfile.lock
 
 manage.py
+
+db.sqlite3
